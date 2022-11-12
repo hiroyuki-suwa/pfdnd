@@ -1,53 +1,70 @@
 <template>
-  <div class="p-4 bg-black rounded-2xl border-4 border-t-stone-900 border-r-stone-800 border-b-stone-600 border-l-stone-800">
-    <div class="w-160 h-160 flex flex-col justify-center">
-      <div class="w-full flex justify-center items-center gap-4 overflow-hidden">
-        <pfd-speed :ias="ias" />
+  <div class="w-160 h-160 flex flex-col justify-end items-center text-white bg-slate-900">
+    <div class="w-full mb-16 flex justify-center items-center gap-8">
+      <pfd-speed :air-speed="ias" :ground-speed="groundSpeed" :commanded-air-speed="commandedAirSpeed" />
+      <div class="relative flex flex-col justify-end items-center">
         <pfd-horizon :pitch="pitch" :bank="bank" />
-        <pfd-altitude :alt="alt" />
+        <div class="absolute -bottom-36 w-full h-28 flex flex-col justify-start items-center overflow-hidden">
+          <span class="text-3xl text-white transform translate-y-1">▽</span>
+          <pfd-navigation :course="course" :heading="heading" :size="400" />
+        </div>
+        <pfd-aoa-indicator class="absolute -top-24 right-4" :aoa="aoa" :stab-trim="stabTrim" />
       </div>
-      <div class="w-full h-32 flex flex-col justify-start items-center overflow-hidden">
-        <span class="text-3xl text-white transform translate-y-1">▽</span>
-        <pfd-navigation :course="course" :heading="heading"/>
-      </div>
+      <pfd-altitude :altitude="altitude" :vertical-speed="verticalSpeed" :commanded-altitude="commandedAltitude" :inchHg="inchHg" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import PfdSpeed from '~/components/pfd/PfdSpeed.vue';
-import PfdHorizon from '~/components/pfd/PfdHorizon.vue';
-import PfdAltitude from '~/components/pfd/PfdAltitude.vue';
-import PfdNavigation from '~/components/pfd/PfdNavigation.vue';
 
 export default Vue.extend({
   name: 'PfdPanel',
-  components: { PfdSpeed, PfdHorizon, PfdAltitude, PfdNavigation },
   props: {
     pitch: {
       type: Number,
-      default: 0,
+      required: true,
     },
     bank: {
       type: Number,
-      default: 0,
+      required: true,
     },
     heading: {
       type: Number,
-      default: 0,
+      required: true,
     },
     ias: {
       type: Number,
-      default: 0,
+      required: true,
     },
-    alt: {
+    groundSpeed: {
       type: Number,
-      default: 0,
+    },
+    altitude: {
+      type: Number,
+      required: true,
+    },
+    verticalSpeed: {
+      type: Number,
+      required: true,
+    },
+    commandedAirSpeed: {
+      type: Number,
+    },
+    commandedAltitude: {
+      type: Number,
     },
     course: {
       type: Number,
-      default: 0,
+    },
+    aoa: {
+      type: Number,
+    },
+    stabTrim: {
+      type: Number,
+    },
+    inchHg: {
+      type: Number,
     },
   },
 })

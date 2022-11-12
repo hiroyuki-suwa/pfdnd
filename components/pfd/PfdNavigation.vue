@@ -1,12 +1,12 @@
 <template>
   <div class="text-white">
-    <div class="relative text-white bg-gray-700 border-2 border-white rounded-full"
-      :style="{transform: `rotate(${-heading}deg)`, transition: 'transform .3s', height: `${size}px`, width: `${size}px`}">
+    <div class="relative text-white bg-gray-600 rounded-full"
+      :style="{transform: `rotate(${-heading}deg)`, height: `${size}px`, width: `${size}px`}">
       <div v-for="(tick) in ticks" :key="tick.value" class="absolute top-0 left-1/2 w-0 h-full" :style="{transform: `rotate(${tick.value}deg)`}">
-        <div class="absolute top-0 w-0.5 transform -translate-x-1/2 bg-white" :style="{height: tick.major ? '2%' : '1%'}" />
-        <div v-if="tick.label" class="absolute left-1/2 transform -translate-x-1/2 text-white text-lg" :style="{top: '2%', fontSize: tick.large ? `${size/32}` : `${size/40}px`}">{{ tick.label }}</div>
+        <div class="absolute top-0 w-0.5 transform -translate-x-1/2 bg-white" :style="{height: tick.major ? '4%' : '2%'}" />
+        <div v-if="tick.label" class="absolute left-1/2 transform -translate-x-1/2 text-white text-lg" :style="{top: '4%', fontSize: tick.large ? `${size/32}` : `${size/40}px`}">{{ tick.label }}</div>
       </div>
-      <div class="absolute top-0 left-1/2 w-0 h-full" :style="{transform: `rotate(${course}deg)`}">
+      <div v-if="course !== undefined" class="absolute top-0 left-1/2 w-0 h-full" :style="{transform: `rotate(${course}deg)`}">
         <div class="absolute left-1/2 transform -translate-x-1/2 scale-x-150 text-pink-400 text-2xl" :style="{top: '-1em', fontFamily: 'sans', fontSize: `${size/18}px`}">M</div>
       </div>
     </div>
@@ -21,11 +21,10 @@ export default Vue.extend({
   props: {
     heading: {
       type: Number,
-      default: 0,
+      required: true,
     },
     course: {
       type: Number,
-      default: 0,
     },
     size: {
       type: Number,

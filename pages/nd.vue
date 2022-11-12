@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="fixed inset-0 bg-stone-700" />
+    <div class="fixed inset-0 bg-black" />
     <div class="relative w-screen h-screen flex justify-center items-center">
-      <nd-panel :heading="heading" :course="course" />
+      <nd-panel :heading="heading" :tracking="heading" :course="course" />
       <input type="range" class="absolute bottom-0 left-0 w-full" min="-360" max="360" v-model="course" />
     </div>
   </div>
@@ -14,7 +14,7 @@ import Vue, { computed, onMounted, onUnmounted, ref } from 'vue'
 export default Vue.extend({
   name: "NdPage",
   setup() {
-    const fps = 10 // frames per second
+    const fps = 50 // frames per second
     const resolution = .01 // degrees
     const turnRateLimit = 3 // degrees per second
     const turnRateOffset = .2 // degrees per second

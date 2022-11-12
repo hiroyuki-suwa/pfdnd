@@ -3,9 +3,9 @@
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=B612+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
 
 #app {
-  font-family: 'B612 Mono', monospace;
+  font-family: 'Didact Gothic', sans-serif;
 }
 </style>

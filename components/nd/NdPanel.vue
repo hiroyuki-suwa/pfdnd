@@ -1,32 +1,33 @@
 <template>
-  <div class="p-4 bg-black rounded-2xl border-4 border-t-stone-900 border-r-stone-800 border-b-stone-600 border-l-stone-800">
-    <div class="w-160 h-160 flex flex-col justify-center">
-      <div class="flex flex-col justify-center items-center">
-        <div class="w-24 text-3xl text-white text-center border-x border-b border-white">{{ hdg }}</div>
-      </div>
-      <div class="w-full h-120 -mt-2 flex flex-col justify-start items-center overflow-hidden">
-        <span class="text-3xl text-white transform translate-y-1">▽</span>
-        <nd-navigation :heading="heading" :course="course" :size="960" />
-      </div>
+  <div class="w-160 h-160 flex flex-col justify-start items-center bg-slate-900">
+    <div class="flex justify-center items-center">
+      <div class="mx-4 text-2xl text-green-400">HDG</div>
+      <div class="w-24 text-2xl text-white text-center border-x border-b border-white">{{ hdg }}</div>
+      <div class="mx-4 text-2xl text-green-400">MAG</div>
+    </div>
+    <div class="relative w-full h-140 -mt-2 flex flex-col justify-start items-center overflow-hidden">
+      <span class="text-3xl text-white transform translate-y-1">▽</span>
+      <nd-navigation :heading="heading" :tracking="tracking" :course="course" :size="960" />
+      <div class="absolute top-128 text-white text-xl scale-y-150">△</div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue, { computed } from 'vue'
-import NdNavigation from '~/components/nd/NdNavigation.vue';
 
 export default Vue.extend({
   name: 'NdPanel',
-  components: { NdNavigation },
   props: {
     heading: {
       type: Number,
-      default: 0,
+      required: true,
+    },
+    tracking: {
+      type: Number,
     },
     course: {
       type: Number,
-      default: 0,
     },
   },
   setup(props) {

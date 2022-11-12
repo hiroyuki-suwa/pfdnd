@@ -1,16 +1,20 @@
 <template>
   <div class="text-white">
     <div class="relative text-white border-2 border-white rounded-full"
-      :style="{transform: `rotate(${-heading}deg)`, transition: 'transform .3s', height: `${size}px`, width: `${size}px`}">
+      :style="{transform: `rotate(${-heading}deg)`, height: `${size}px`, width: `${size}px`}">
       <div class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 w-3/4 h-3/4 border-2 border-dashed border-white rounded-full" />
       <div class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 w-1/2 h-1/2 border-2 border-dashed border-white rounded-full" />
       <div class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 w-1/4 h-1/4 border-2 border-dashed border-white rounded-full" />
       <div v-for="(tick) in ticks" :key="tick.value" class="absolute top-0 left-1/2 w-0 h-full" :style="{transform: `rotate(${tick.value}deg)`}">
         <div class="absolute top-0 w-0.5 transform -translate-x-1/2 bg-white" :style="{height: tick.major ? '2%' : '1%'}" />
-        <div v-if="tick.label" class="absolute left-1/2 transform -translate-x-1/2 text-white text-lg" :style="{top: '2%', fontSize: `${size/64}px`}">{{ tick.label }}</div>
+        <div v-if="tick.label" class="absolute left-1/2 transform -translate-x-1/2 text-white" :style="{top: '2%', fontSize: `${size/56}px`}">{{ tick.label }}</div>
       </div>
-      <div class="absolute top-0 left-1/2 w-0 h-full" :style="{transform: `rotate(${course}deg)`}">
+      <div v-if="course !== undefined" class="absolute top-0 left-1/2 w-0 h-full" :style="{transform: `rotate(${course}deg)`}">
         <div class="absolute left-1/2 transform -translate-x-1/2 scale-x-150 text-pink-400" :style="{top: '-1.25em', fontFamily: 'sans', fontSize: `${size/40}px`}">M</div>
+        <div class="absolute left-1/2 transform -translate-x-1/2 w-3/4 border border-dashed border-pink-400" :style="`height: ${size/2}px;`" />
+      </div>
+      <div v-if="tracking !== undefined" class="absolute top-0 left-1/2 w-0 h-full" :style="{transform: `rotate(${tracking}deg)`}">
+        <div class="absolute left-1/2 transform -translate-x-1/2 w-3/4 border border border-white" :style="`height: ${size/2}px;`" />
       </div>
     </div>
   </div>
@@ -24,11 +28,13 @@ export default Vue.extend({
   props: {
     heading: {
       type: Number,
-      default: 0,
+      required: true,
+    },
+    tracking: {
+      type: Number,
     },
     course: {
       type: Number,
-      default: 0,
     },
     size: {
       type: Number,
